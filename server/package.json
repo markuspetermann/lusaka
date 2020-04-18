@@ -1,0 +1,22 @@
+{
+  "name": "lusaka-server",
+  "version": "1.1.0",
+  "author": "Markus Petermann",
+  "license": "",
+  "main": "lusaka.js",
+  "scripts": {
+    "install": "",
+    "dev": "pm2 start --env development --watch && cd ../client && npm run serve",
+    "merge": "cd .. && git checkout master && git pull \"origin\" master && git merge dev && git push --progress origin master:master && git checkout dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-compress": "^3.0.0",
+    "koa-helmet": "^4.2.0",
+    "koa-router": "^7.4.0",
+    "koa-send": "^5.0.0",
+    "simple-git": "^1.116.0",
+    "walker": "^1.0.7"
+  }
+}
