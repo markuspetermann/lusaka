@@ -36,7 +36,7 @@ Then run the following to build and deploy lusaka to your host
 
 ```bash
 $ cd server
-$ pm2 deploy production setup #only on fresh install
+$ pm2 deploy production setup # only on fresh install
 $ pm2 deploy production update
 $ pm2 deploy production exec "pm2 reload all"
 ```

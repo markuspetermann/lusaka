@@ -1,4 +1,6 @@
-module.exports = {
+const { defineConfig } = require('@vue/cli-service');
+
+module.exports = defineConfig({
   publicPath: process.env.NODE_ENV === "production"
     ? "/client/"
     : "/",
@@ -7,9 +9,7 @@ module.exports = {
 
   productionSourceMap: false,
 
-  configureWebpack: {
-    externals: {
-      crypto: "crypto"
-    }
-  }
-}
+  transpileDependencies: [
+    'vuetify'
+  ],
+});
