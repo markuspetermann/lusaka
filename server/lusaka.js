@@ -117,7 +117,8 @@ router.get("/tree", async (ctx, next) => {
 /* Retrive single note if id is the full path and filename or
  * multiple notes if id just includes a path */
 router.get("/md/(.*)", async (ctx, next) => {
-    let _path = config.datadir + ctx.params[0]; console.log("test: " + _path);
+    let _path = config.datadir + ctx.params[0];
+    if (DEV) console.log("md: " + _path);
     let mds = await _get_mds(_path);
     ctx.body = { mds: mds };
 });
