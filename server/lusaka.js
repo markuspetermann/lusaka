@@ -123,6 +123,12 @@ router.get("/md/(.*)", async (ctx, next) => {
     ctx.body = { mds: mds };
 });
 
+/* Serve images that are stored next to the markdown files */
+router.get(/\/img\/(.*\.(jpg|png))/, async (ctx, next) => {
+    if (DEV) console.log("img: " + __dirname + '/' + config.datadir + ctx.params[0]);
+    await koaSend(ctx, ctx.params[0], { root: __dirname + '/' + config.datadir });
+});
+
 /* If nothing else matches send index.html */
 router.get("/*", async (ctx, next) => {
     let isDoc = /(.*)\.md/i;
