@@ -51,14 +51,29 @@ const server = (PROD && config.tls_enabled) ?
 
 /* Public Routes */
 
+function _parse_md_timestamp(data) {
+    const [firstLine] = data.split("\n");
+    return firstLine.startsWith(";") ? parseInt(firstLine.slice(1)) : null;
+};
+
 function _read_md(_path) {
     let md = {};
     let fd = fs.openSync(_path, "r");
+
     md.data = fs.readFileSync(fd, { encoding: "utf8" });
     md.time = fs.fstatSync(fd).mtimeMs;
     md.path = _path.replace(/\\/g, "/").substring(config.datadir.length);
     md.name = path.basename(_path, ".md");
+
     fs.closeSync(fd);
+
+    const md_time = _parse_md_timestamp(md.data);
+
+    if (md_time) {
+        md.time = md_time;
+        md.data = md.data.substring(md.data.indexOf('\n') + 1);
+    }
+
     return md;
 }
 
