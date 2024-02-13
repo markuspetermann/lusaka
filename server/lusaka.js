@@ -131,7 +131,7 @@ router.get("/tree", async (ctx, next) => {
 
 /* Retrive single note if id is the full path and filename or
  * multiple notes if id just includes a path */
-router.get("/md/:md?", async (ctx, next) => {
+router.get("/md/:md(.*)", async (ctx, next) => {
     let _path = config.datadir + (ctx.params.md ? ctx.params.md : "");
     if (DEV) console.log("md: " + _path);
     let mds = await _get_mds(_path);
@@ -155,8 +155,11 @@ router.get("(.*)", async (ctx, next) => {
 });
 
 
+var helmet_opts = {};
+
 /* set unsafe CORS headers, for development only !!! */
 if(DEV) {
+    helmet_opts = { crossOriginResourcePolicy: { policy: "cross-origin" }};
     app.use(async (ctx, next) => {
         ctx.set("Access-Control-Allow-Origin", "http://localhost:8080");
         ctx.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-xsrf-token");
@@ -167,7 +170,7 @@ if(DEV) {
 }
 
 
-app.use(helmet());
+app.use(helmet(helmet_opts));
 app.use(compress());
 app.use(router.routes());
 app.use(router.allowedMethods());
