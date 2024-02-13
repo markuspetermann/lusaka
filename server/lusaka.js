@@ -141,8 +141,8 @@ router.get("/md/:md(.*)", async (ctx, next) => {
 /* Serve additional materials, e.g. images, script files, that are stored next
  * to the markdown files */
 router.get(/\/support\/(.*\.(jpg|png|py))/, async (ctx, next) => {
-    if (DEV) console.log("support: " + __dirname + '/' + config.datadir + ctx.params[0]);
-    await koaSend(ctx, ctx.params[0], { root: __dirname + '/' + config.datadir });
+    if (DEV) console.log("support: " + config.datadir + ctx.params[0]);
+    await koaSend(ctx, ctx.params[0], { root: config.datadir });
 });
 
 /* If nothing else matches send index.html */
