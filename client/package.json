@@ -1,6 +1,6 @@
 {
   "name": "lusaka-client",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Markus Petermann",
   "private": true,
   "scripts": {
