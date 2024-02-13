@@ -131,8 +131,8 @@ router.get("/tree", async (ctx, next) => {
 
 /* Retrive single note if id is the full path and filename or
  * multiple notes if id just includes a path */
-router.get("/md/(.*)", async (ctx, next) => {
-    let _path = config.datadir + ctx.params[0];
+router.get("/md/:md?", async (ctx, next) => {
+    let _path = config.datadir + (ctx.params.md ? ctx.params.md : "");
     if (DEV) console.log("md: " + _path);
     let mds = await _get_mds(_path);
     ctx.body = { mds: mds };
@@ -145,7 +145,7 @@ router.get(/\/img\/(.*\.(jpg|png))/, async (ctx, next) => {
 });
 
 /* If nothing else matches send index.html */
-router.get("/*", async (ctx, next) => {
+router.get("(.*)", async (ctx, next) => {
     let isDoc = /(.*)\.md/i;
     if(ctx.path.match(isDoc))
         ctx.set("X-Robots-Tag", "index");
