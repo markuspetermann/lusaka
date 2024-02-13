@@ -182,6 +182,18 @@ server.listen(PROD ? config.prod_port : config.dev_port, config.listen);
 
 /* Periodic Tasks */
 
+function _sort_by_name(arr) {
+    console.log(arr)
+    arr.sort((a, b) => a.name.localeCompare(b.name));
+    arr.forEach(item => {
+        if (item.children && item.children.length > 0) {
+            _sort_by_name(item.children);
+        }
+    });
+
+    return arr;
+};
+
 async function _rescan_data() {
     let dirs = [];
     let newtree = [];
@@ -222,7 +234,7 @@ async function _rescan_data() {
                 }
             }
         }
-        tree = newtree;
+        tree = _sort_by_name(newtree);
         if(DEV) console.log("Tree updated");
     });
 };
