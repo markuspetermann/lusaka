@@ -3,7 +3,7 @@
     <div v-for="md in mds" :key="md.name">
       <span class="reader-info">{{ md.time | moment("DD.MM.YYYY") }}&ensp;–&ensp;<a :href='"/" + md.path'>{{ md.path }}</a></span>
       <hr class="reader-line" />
-      <vue-markdown class="reader-content" :source="md.data" @rendered="updatePrism"></vue-markdown>
+      <vue-markdown class="reader-content" :source="md.data" @rendered="updatePrism" :linkify=false></vue-markdown>
     </div>
   </div>
 </template>
