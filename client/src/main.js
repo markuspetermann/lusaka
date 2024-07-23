@@ -19,7 +19,7 @@ Vue.prototype.$http = axios;
 Vue.prototype.$filters = Vue.options.filters;
 Vue.use(VueMoment);
 
-Vue.filter("formatname", n => n.replace(/__/g," / ").replace(/_/g," ").replace(/#/g,"_"));
+Vue.filter("formatname", n => n.replace(/__/g," / ").replace(/_/g," ").replace(/-/g,"_"));
 
 new Vue({
   router,
