@@ -68,4 +68,4 @@ $ cd client && npm run build
 
 ## Example
 
-See https://notes.markuspetermann.net for an example.
+See https://markuspetermann.net for an example.
